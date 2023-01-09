@@ -1,0 +1,19 @@
+---
+- name: Provision SRV Dev
+  hosts: all
+  become: yes
+  become_method: sudo
+  remote_user: vagrant
+  #ansible_ssh_private_key_file: /home/quentin/bloc3-slam/vagrant/.vagrant/machines/default/virtualbox/private_key
+  vars:
+      ansible_ssh_private_key_file: /home/quentin/bloc3-slam/vagrant/.vagrant/machines/default/virtualbox/private_key
+  tasks:
+      - import_tasks: taches/confreseau.yml
+      - import_tasks: taches/upgrade.yml
+      - import_tasks: taches/lamp.yml
+    #  - import_tasks: chapter3/two_factor.yml
+    #  - import_tasks: chapter4/web_application.yml
+    #  - import_tasks: chapter4/sudoers.yml
+    #  - import_tasks: chapter5/firewall.yml
+  #handlers:
+    #  - import_tasks: handlers/restart_ssh.yml

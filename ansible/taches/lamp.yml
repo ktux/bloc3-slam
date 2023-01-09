@@ -1,0 +1,33 @@
+- name: Installation de Apache PHP et MariaDB
+  apt:
+    pkg:
+      - mariadb-server
+      - apache2
+      - php
+      - libapache2-mod-php
+      - php-cli
+      - php-mysql
+      - php-zip
+      - php-curl
+      - php-xml
+      - wget
+    state: present
+    update_cache: true
+
+- name: Installation de PHPMyAdmin
+  apt:
+    name: phpmyadmin
+    state: present
+    update_cache: true
+
+- name: Configuration de PHPMyAdmin
+  template:
+    src: "./taches/phpmyadmin.conf"
+    dest: "/etc/apache2/conf-available/phpmyadmin.conf"
+
+- name: Activation de la configuration de PHPMyAdmin
+  shell: a2enconf phpmyadmin
+
+- name: Redemarrer le service Apache
+  shell: systemctl restart apache2
+

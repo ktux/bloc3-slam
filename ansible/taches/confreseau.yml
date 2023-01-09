@@ -1,0 +1,9 @@
+- name: Suppression de la passerelle par defaut existante
+  shell: ip route delete default
+
+- name: Ajout de la passerelle par defaut
+  shell: ip route add default via 192.168.130.62
+
+- name: Ajout des serveurs DNS
+  shell: echo $'nameserver 192.168.130.10\nnameserver 9.9.9.9' > /etc/resolv.conf
+
